@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>그림판 만들기</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="500" style="border:1px solid #000;"></canvas>
+<br>
+<button onclick="changeColor('black')" style="background-color: black; color: white;">&nbsp;</button>
+<button onclick="changeColor('red')" style="background-color: red; color: white;">&nbsp;</button>
+<button onclick="changeColor('blue')" style="background-color: blue; color: white;">&nbsp;</button>
+<button onclick="useEraser()" style="background-color: white; color: black;">Eraser</button>
+
+<script>
+  var canvas = document.getElementById('myCanvas');
+  var ctx = canvas.getContext('2d');
+  var painting = false;
+  var penColor = 'black';
+  var eraserMode = false;
+
+  function startPosition(e) {
+    painting = true;
+    draw(e);
+  }
+
+  function endPosition() {
+    painting = false;
+    ctx.beginPath();
+  }
+
+  function draw(e) {
+    if (!painting) return;
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    if (eraserMode) {
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 20;
+    } else {
+      ctx.strokeStyle = penColor;
+    }
+
+    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  }
+
+  function changeColor(color) {
+    penColor = color;
+    eraserMode = false;
+  }
+
+  function useEraser() {
+    eraserMode = true;
+    penColor = 'white';
+  }
+
+  canvas.addEventListener('mousedown', startPosition);
+  canvas.addEventListener('mouseup', endPosition);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseleave', endPosition);
+
+  canvas.addEventListener('touchstart', startPosition);
+  canvas.addEventListener('touchend', endPosition);
+  canvas.addEventListener('touchmove', draw);
+
+</script>
+
+</body>
+</html>
