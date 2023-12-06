@@ -154,6 +154,8 @@
             background: #FFFFFF;
             box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
             column-count: auto;
+
+
         }
 
         .paper-content {
@@ -181,24 +183,7 @@
     </style>
     <style>
         #main-section {
-            width: 920px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 919px) {
-            #main-section { width: 690px; }
-        } 
-
-        @media (min-width: 920px) and (max-width:1149px) {
-            #main-section { width: 920px; }
-        } 
-
-        @media (min-width:1150px) and (max-width:1379px) {
-            #main-section { width: 1150px; }
-        }
-
-        @media (min-width:1380px) {
-            #main-section { width: 1380px; }
+            column-count: 5;
         }
     </style>
     <style>
@@ -241,7 +226,7 @@
                 $(this).find('.inner-menu').css('display', 'none');
             });
         });
-          
+
         $(document).ready(function () {
             $('#main-section').imagesLoaded(function () {
                 $('#main-section').masonry({
@@ -252,7 +237,6 @@
             });
 });
           
-        
         $(document).ready(function () {
             function showLightBox() {
                 $('#darken-background').show();
@@ -326,7 +310,6 @@
         </ul> 
     </nav> 
     <section id="main-section"> 
-         
         <div class="paper"> 
             <div class="paper-holder"> 
                 <a><img width="190" src="https://placekitten.com/190/328"></a> 
