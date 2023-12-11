@@ -7,10 +7,10 @@
 
 <canvas id="myCanvas" width="800" height="500" style="border:1px solid #000;"></canvas>
 <br>
-<button onclick="changeColor('black')" style="background-color: black; color: white;">&nbsp;</button>
-<button onclick="changeColor('red')" style="background-color: red; color: white;">&nbsp;</button>
-<button onclick="changeColor('blue')" style="background-color: blue; color: white;">&nbsp;</button>
+<input type="color" id="colorPicker">
+<input type="range" id="penSize" min="1" max="20" value="5">
 <button onclick="useEraser()" style="background-color: white; color: black;">Eraser</button>
+<button onclick="saveImage()">Save Image</button>
 
 <script>
   var canvas = document.getElementById('myCanvas');
@@ -18,6 +18,7 @@
   var painting = false;
   var penColor = 'black';
   var eraserMode = false;
+  var penSize = 5;
 
   function startPosition(e) {
     painting = true;
@@ -31,7 +32,7 @@
 
   function draw(e) {
     if (!painting) return;
-    ctx.lineWidth = 5;
+    ctx.lineWidth = penSize;
     ctx.lineCap = 'round';
     if (eraserMode) {
       ctx.strokeStyle = 'white';
@@ -65,7 +66,27 @@
   canvas.addEventListener('touchend', endPosition);
   canvas.addEventListener('touchmove', draw);
 
-</script>
+  // Color picker input event
+  document.getElementById('colorPicker').addEventListener('input', function(event) {
+    penColor = event.target.value;
+    eraserMode = false;
+  });
 
+  // Pen size slider input event
+  document.getElementById('penSize').addEventListener('input', function(event) {
+    penSize = event.target.value;
+  });
+
+  // Save image function
+  function saveImage() {
+    var image = canvas.toDataURL(); // Get the canvas data as a URL
+    var link = document.createElement('a'); // Create a link element
+    link.href = image; // Set the href attribute to the canvas data URL
+    link.download = 'my_drawing.png'; // Set the download attribute with a default name
+    link.click(); // Simulate a click on the link to trigger download
+  }
+
+</script>
+<h1>2302575 이영주</h1>
 </body>
 </html>
