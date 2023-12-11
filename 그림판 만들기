@@ -79,11 +79,11 @@
 
   // Save image function
   function saveImage() {
-    var image = canvas.toDataURL(); // Get the canvas data as a URL
-    var link = document.createElement('a'); // Create a link element
-    link.href = image; // Set the href attribute to the canvas data URL
-    link.download = 'my_drawing.png'; // Set the download attribute with a default name
-    link.click(); // Simulate a click on the link to trigger download
+    var image = canvas.toDataURL(); 
+    var link = document.createElement('a'); 
+    link.href = image; 
+    link.download = 'my_drawing.png'; 
+    link.click(); 
   }
 
 </script>
